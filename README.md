@@ -41,7 +41,7 @@ SLACKWARE64-15.0: slackware64/l alsa-plugins-1.2.5-x86_64-1.txz
 ```
 ## Grep regex
 
-You know. As the script is simple and use you grep you can use triks to reduce the sort of packages.
+You know. As the script is simple and use grep, you can use triks to reduce the sort of packages.
 Notice the space on between "jack-1" and " jack-1".
 
 ```

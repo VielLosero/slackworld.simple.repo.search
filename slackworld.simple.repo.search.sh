@@ -40,7 +40,7 @@ fi
 # NOTES: Ponce's repo have signes packages but dont have a CHECKSUMS.md5 file so looking to make a easy list from git.
 #
 # SLINT REPO https://slackware.uk/slint/
-# NOTES: SLINT DONT WORK. SLINT dont sign each package so we can't grep ".asc" like others. I dont want to change the grep to search for package extension because package extension can be a garbaje too. txz tgz tar.gz If someone want to check the package is not easy on SLINT. Download CHECKSUMS.md5.gz.asc  then download , then CHECKSUMS.md5.gz  , so why they put a CHECKSUMS.md5 file??
+# NOTES: SLINT DONT WORK. SLINT dont sign each package so we can't grep ".asc" like others. I dont want to change the grep to search for package extension because package extension can be a garbaje too. txz tgz tar.gz Reason 2, if someone want to check the package is not easy on SLINT. Download CHECKSUMS.md5.gz.asc  then download CHECKSUMS.md5.gz , unzip , so why they put a CHECKSUMS.md5 and CHECKSUMS.md5.gz file??
 #[[ ! -e ${TEMP_DIR}/SLINT-x86_64.CHECKSUMS.md5 ]] && wget -O ${TEMP_DIR}/SLINT-x86_64.CHECKSUMS.md5 https://slackware.uk/slint/x86_64/slint-15.0/CHECKSUMS.md5
 #[[ ! -e ${TEMP_DIR}/SLINT-x86_64.CHECKSUMS.md5.asc ]] && wget -O ${TEMP_DIR}/SLINT-x86_64.CHECKSUMS.md5.asc https://slackware.uk/slint/x86_64/slint-15.0/CHECKSUMS.md5.asc
 #
@@ -63,8 +63,11 @@ fi
 [[ ! -e ${TEMP_DIR}/SLACKWARE64-15.0.CHECKSUMS.md5 ]] && wget -O ${TEMP_DIR}/SLACKWARE64-15.0.CHECKSUMS.md5 https://mirrors.slackware.com/slackware/slackware64-15.0/CHECKSUMS.md5
 [[ ! -e ${TEMP_DIR}/SLACKWARE64-15.0.CHECKSUMS.md5.asc ]] && wget -O ${TEMP_DIR}/SLACKWARE64-15.0.CHECKSUMS.md5.asc https://mirrors.slackware.com/slackware/slackware64-15.0/CHECKSUMS.md5.asc
 
-# check if sig are ok or exit
-#
+# check if sig are ok or delete file.
+for file in $(find $TEMP_DIR -name ".asc") ; do
+  which gpg2
+
+done
 
 # format file to check for installed packages
 [[ ! -e ${TEMP_DIR}/INSTALLED.CHECKSUMS.md5 ]] && cd /var/lib/pkgtools/packages/ && ls -1 | sed 's/$/.asc/' |sed 's:^:no  ./n/a/:'   >  ${TEMP_DIR}/INSTALLED.CHECKSUMS.md5 
