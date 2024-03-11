@@ -77,7 +77,6 @@ echo +--------------------------------------+
 grep "\.asc$" \
   ${TEMP_DIR}/INSTALLED.CHECKSUMS.md5 \
   ${TEMP_DIR}/SBO-15.0.CHECKSUMS.md5 \
-  ${TEMP_DIR}/SLINT-x86_64.CHECKSUMS.md5 \
   ${TEMP_DIR}/SLACKEL-i486.CHECKSUMS.md5 \
   ${TEMP_DIR}/SLACKEL-x86_64.CHECKSUMS.md5 \
   ${TEMP_DIR}/ALIEN-ALL.CHECKSUMS.md5 \
