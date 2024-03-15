@@ -13,8 +13,8 @@
 /opt/slackware-repositories/slackbuilds/15.0/system/chronograf/chronograf.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/system/colord/colord.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/system/influxdb/influxdb.SlackBuild 
-/opt/slackware-repositories/slackbuilds/15.0/system/kafka/kafka.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/system/kapacitor/kapacitor.SlackBuild 
+/opt/slackware-repositories/slackbuilds/15.0/system/kafka/kafka.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/system/netdata/netdata.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/system/ntopng/ntopng.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/system/nut/nut.SlackBuild 

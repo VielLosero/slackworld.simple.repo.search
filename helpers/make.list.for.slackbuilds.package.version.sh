@@ -42,7 +42,6 @@ for i in $(cat ${CWD}/slackbuilds.package.version.failed.txt) ; do
   echo "${PKGNAM}-${VERSION}-${BUILD}${TAG}.${PKGTYPE}.asc" >> ${CWD}/slackbuilds.package.version.unordered.txt
 done
 
-exit 1
 # order packages
 cat ${CWD}/slackbuilds.package.version.unordered.txt | sort > ${CWD}/slackbuilds.package.version.txt && rm ${CWD}/slackbuilds.package.version.unordered.txt
 
