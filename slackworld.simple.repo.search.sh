@@ -25,10 +25,27 @@ cd $(dirname $0) && CWD=$(pwd)
 TEMP_DIR=${TEMP_DIR:-/tmp/repocheck}
 [[ ! -d $TEMP_DIR ]] &&  mkdir $TEMP_DIR
 
+# check for tools
+type wget gpg2 grep cut > /dev/null || exit 1
+
 # remove files on tmp dir to update it
 if [ "$UPDATE" == "yes" ] ; then 
   rm $TEMP_DIR/*
 fi  
+
+# search for UPGRADES
+if [ "$UPGRADE" == "yes" ] ; then 
+  # ieach time update format file to check for installed packages
+  cd /var/lib/pkgtools/packages/ && ls -1 | sed 's/$/.asc/' |sed 's:^:no  ./n/a/:'   >  ${TEMP_DIR}/INSTALLED.CHECKSUMS.md5 
+  cd $CWD
+  echo +--------------------------------------+
+  unset UPGRADE
+  bash $0 |grep -v INSTALLED | cut -d" " -f3 | sort | rev | cut -d. -f2- | rev > $TEMP_DIR/ALL
+  bash $0 |grep INSTALLED | cut -d" " -f3 | sort > $TEMP_DIR/INS
+  diff -u  $TEMP_DIR/ALL $TEMP_DIR/INS | grep -v "^+++" | grep "^+"
+  echo +--------------------------------------+
+  exit 0
+fi
 
 # get CHECKSUM.md5 and CHECKSUM.md5.asc to check signature from repos
 # Uncomment or comment desired repos.
@@ -65,7 +82,7 @@ fi
 
 # check if sig are ok or delete file.
 for file in $(find $TEMP_DIR -name ".asc") ; do
-  which gpg2
+  type gpg2
 
 done
 
