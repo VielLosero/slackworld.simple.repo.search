@@ -33,14 +33,16 @@ time find /opt/slackware-repositories/slackbuilds/15.0/ -type f -name *.SlackBui
 
 # add packages not ok
 for i in $(cat ${CWD}/slackbuilds.package.version.failed.txt) ; do 
-  PKGNAM=$(grep '^PRGNAM=' $i | cut -d= -f2)
+  PKGNAM=$(grep '^PRGNAM=' $i | cut -d= -f2 | tr -d '"')
   VERSION=$(grep '^VERSION=' $i | cut -d- -f2 |tr -d "}")
   BUILD=$(grep '^BUILD=' $i | cut -d- -f2 |tr -d "}")
   TAG=$(grep '^TAG=' $i | cut -d- -f2 |tr -d "}")
   PKGTYPE=$(grep '^PKGTYPE=' $i | cut -d- -f2 |tr -d "}")
+  #echo "${PKGNAM}-${VERSION}-${BUILD}${TAG}.${PKGTYPE}.asc"
   echo "${PKGNAM}-${VERSION}-${BUILD}${TAG}.${PKGTYPE}.asc" >> ${CWD}/slackbuilds.package.version.unordered.txt
 done
 
+exit 1
 # order packages
 cat ${CWD}/slackbuilds.package.version.unordered.txt | sort > ${CWD}/slackbuilds.package.version.txt && rm ${CWD}/slackbuilds.package.version.unordered.txt
 
