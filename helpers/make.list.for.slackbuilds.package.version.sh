@@ -24,8 +24,25 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 
 rm ${CWD}/../SBO-15.0.packages_versions.txt
+rm ${CWD}/slackbuilds.package.version.failed.txt
 
-time for i in $(find /opt/slackware-repositories/slackbuilds/15.0/ -type f -name "*.SlackBuild" ) ; do PRINT_PACKAGE_NAME=y bash  $i   2>/dev/null   ; done  | grep "\.tgz" > ${CWD}/slackbuilds.package.version.txt
+# 1min 30 s
+#time for i in $(find /opt/slackware-repositories/slackbuilds/15.0/ -type f -name "*.SlackBuild" ) ; do PRINT_PACKAGE_NAME=y bash  $i   2>/dev/null   ; done  | grep "\.tgz" > ${CWD}/slackbuilds.package.version.txt
+# 45 seg
+time find /opt/slackware-repositories/slackbuilds/15.0/ -type f -name *.SlackBuild | parallel "PRINT_PACKAGE_NAME=y bash {} 2>/dev/null | grep '\.tgz' >> ${CWD}/slackbuilds.package.version.unordered.txt || echo {}' ' >>${CWD}/slackbuilds.package.version.failed.txt"
+
+# add packages not ok
+for i in $(cat ${CWD}/slackbuilds.package.version.failed.txt) ; do 
+  PKGNAM=$(grep '^PRGNAM=' $i | cut -d= -f2)
+  VERSION=$(grep '^VERSION=' $i | cut -d- -f2 |tr -d "}")
+  BUILD=$(grep '^BUILD=' $i | cut -d- -f2 |tr -d "}")
+  TAG=$(grep '^TAG=' $i | cut -d- -f2 |tr -d "}")
+  PKGTYPE=$(grep '^PKGTYPE=' $i | cut -d- -f2 |tr -d "}")
+  echo "${PKGNAM}-${VERSION}-${BUILD}${TAG}.${PKGTYPE}.asc" >> ${CWD}/slackbuilds.package.version.unordered.txt
+done
+
+# order packages
+cat ${CWD}/slackbuilds.package.version.unordered.txt | sort > ${CWD}/slackbuilds.package.version.txt && rm ${CWD}/slackbuilds.package.version.unordered.txt
 
 # Add format fot slackworkd.simple.repo.search
 date > ${CWD}/../SBO-15.0.packages_versions.txt 
@@ -44,14 +61,10 @@ if [ -e SBO-15.0.packages_versions.txt ] ; then
 fi
 
 
-
 LINES=$(find /opt/slackware-repositories/slackbuilds/15.0/ -type f -name "*.SlackBuild" | wc -l)
 NAMES=$(cat ${CWD}/slackbuilds.package.version.txt | wc -l)
 
+echo "Package_names not ok: $(cat ${CWD}/slackbuilds.package.version.failed.txt | wc -l)"
+echo "Package_names processed: $NAMES"
+echo "TOTAL .SlackBuild: $LINES"
 
-echo "Package_names not ok: $(echo "$LINES - $NAMES" | bc)"
-echo "Package_names ok: $NAMES"
-echo "TOTAL package_names: $LINES" 
-
-
-#
