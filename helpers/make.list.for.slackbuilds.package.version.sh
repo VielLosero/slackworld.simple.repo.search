@@ -25,6 +25,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 rm ${CWD}/../SBO-15.0.packages_versions.txt
 rm ${CWD}/slackbuilds.package.version.failed.txt
+rm ${CWD}/slackbuilds.package.version.unordered.txt
 
 # 1min 30 s
 #time for i in $(find /opt/slackware-repositories/slackbuilds/15.0/ -type f -name "*.SlackBuild" ) ; do PRINT_PACKAGE_NAME=y bash  $i   2>/dev/null   ; done  | grep "\.tgz" > ${CWD}/slackbuilds.package.version.txt
@@ -43,7 +44,7 @@ for i in $(cat ${CWD}/slackbuilds.package.version.failed.txt) ; do
 done
 
 # order packages
-cat ${CWD}/slackbuilds.package.version.unordered.txt | sort > ${CWD}/slackbuilds.package.version.txt && rm ${CWD}/slackbuilds.package.version.unordered.txt
+cat ${CWD}/slackbuilds.package.version.unordered.txt | sort -u > ${CWD}/slackbuilds.package.version.txt
 
 # Add format fot slackworkd.simple.repo.search
 date > ${CWD}/../SBO-15.0.packages_versions.txt 
