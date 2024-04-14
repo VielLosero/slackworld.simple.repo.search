@@ -3,7 +3,6 @@
 /opt/slackware-repositories/slackbuilds/15.0/business/stansoft/stansoft.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/development/sonarqube/sonarqube.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/games/smokinguns/smokinguns.SlackBuild 
-/opt/slackware-repositories/slackbuilds/15.0/libraries/opencl-amd/opencl-amd.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/multimedia/serviio/serviio.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/network/ircd-hybrid/ircd-hybrid.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/network/kasp_updater/kasp_updater.SlackBuild 
@@ -13,8 +12,8 @@
 /opt/slackware-repositories/slackbuilds/15.0/system/chronograf/chronograf.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/system/colord/colord.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/system/influxdb/influxdb.SlackBuild 
-/opt/slackware-repositories/slackbuilds/15.0/system/kafka/kafka.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/system/kapacitor/kapacitor.SlackBuild 
+/opt/slackware-repositories/slackbuilds/15.0/system/kafka/kafka.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/system/netdata/netdata.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/system/ntopng/ntopng.SlackBuild 
 /opt/slackware-repositories/slackbuilds/15.0/system/nut/nut.SlackBuild 
